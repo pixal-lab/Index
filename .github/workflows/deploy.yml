@@ -3,31 +3,36 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Ejecutar cuando haya un push a la rama `main`
+      - main # Ejecutar cuando haya un push a la rama `main`
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '16'  # O la versión que estés usando
+          node-version: "22"
 
       - name: Install dependencies
-        run: |
-          npm install
+        run: npm install
 
       - name: Build the project
+        run: npm run build 
+
+      - name: Configure Git
         run: |
-          npm run build  # Asegúrate de que este comando esté en tu package.json
+          git config --global user.email "pablo.ahumada1@mail.udp.cl"
+          git config --global user.name "pixal-lab"
+          git remote set-url origin https://$GH_TOKEN@github.com/$GITHUB_REPOSITORY.git
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.1.1
-        with:
-          branch: gh-pages  # El nombre de la rama donde se desplegará el contenido
-          folder: dist      # La carpeta que contiene los archivos generados por Vite (por defecto es `dist`)
-          token: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run deploy
+        env:
+          CI: false
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
