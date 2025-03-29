@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <p className="read-the-docs">
+      <p>
         test2
       </p>
     </>
