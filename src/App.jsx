@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <p className="read-the-docs">
-        test
+        test2
       </p>
     </>
   )
