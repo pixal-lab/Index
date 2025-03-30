@@ -16,10 +16,10 @@ const NavBar = () => {
     }`;
 
   return (
-    <nav className="bg-gray-900 text-white shadow-lg">
-      <div className="container mx-auto flex justify-between items-center p-1">
+    <nav className="bg-gray-900 py-1 text-white shadow-lg">
+      <div className="max-w-inherit scontainer px-7 flex justify-between items-center py-1">
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Logo" className="h-10 w-auto" />
+          <img src={logo} alt="Logo" className="h-8 w-auto" />
           <p>Pixal-lab</p>
         </Link>
 
@@ -27,7 +27,7 @@ const NavBar = () => {
           className="md:hidden text-white focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
+          {isOpen ? <X className="" size={28} /> : <Menu size={28} />}
         </button>
 
         <ul
